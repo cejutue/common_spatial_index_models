@@ -154,21 +154,21 @@ class SpaceFillingCurve {
 		SeqBoxs d;
 		d.resize(1);
 		d[0][0] = x1; d[0][1] = y1; d[0][2] = x2; d[0][3] = y1;
-		ranges(d, FullPrecision, maxRanges);
+		return ranges(d, FullPrecision, maxRanges);
 	}
 	virtual SeqIndexRange ranges(double x1, double x2, double y1, double y2, int precision)
 	{
 		SeqBoxs d;
 		d.resize(1);
 		d[0][0] = x1; d[0][1] = y1; d[0][2] = x2; d[0][3] = y1;
-		ranges(d, precision, maxRanges);
+		return ranges(d, precision, maxRanges);
 	}
 	virtual SeqIndexRange ranges(double x1, double x2, double y1, double y2, int precision, int maxRanges)
 	{
 		SeqBoxs d;
 		d.resize(1);
 		d[0][0] = x1; d[0][1] = y1; d[0][2] = x2; d[0][3] = y1;
-		ranges(d, precision, maxRanges);
+		return ranges(d, precision, maxRanges);
 	}
 
 };
@@ -501,6 +501,7 @@ struct ZN {
 				// queue up each sub-range for processing
 				remaining.push_back(std::make_pair(min, max));
 			}
+			return 0;
 		};
 		std::pair<ull, ull> LevelTerminator = std::make_pair(-1, -1);
 		auto  bottomOut = [this, &remaining, &ranges, LevelTerminator]() ->unsigned int {
@@ -514,6 +515,7 @@ struct ZN {
 				}
 				remaining.pop_front();
 			} while (!remaining.empty());
+			return 0;
 		};
 
 
@@ -888,6 +890,12 @@ struct Z2SpaceFillingCurve : public SpaceFillingCurve
 		//z2先写的,这里不改了, scala代码写的真
 		Z2 zn(2);
 		return zn.zranges(az, precision, maxRanges, 7);
+	}
+
+	// 通过 SpaceFillingCurve 继承
+	virtual SeqIndexRange ranges(SeqBoxs seqboxs, int precision, int maxRanges) override
+	{
+		return SeqIndexRange();
 	}
 };
 #pragma endregion

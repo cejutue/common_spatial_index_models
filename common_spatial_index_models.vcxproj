@@ -153,7 +153,6 @@
   <ItemGroup>
     <ClCompile Include="common_spatial_index_models.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="orderingindex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt" />
